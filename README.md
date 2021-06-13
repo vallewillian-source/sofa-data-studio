@@ -101,3 +101,50 @@ In order for the APIs to be supported by the system, and to allow users to have 
 }
 
 ```
+
+Installation
+---
+
+Use a package manager of your choice (npm, yarn, etc.) in order to install all dependencies
+
+```
+npm install
+```
+
+```
+yarn install
+```
+  
+Usage
+---
+
+In order to run this project 2 scripts will need to be executed dev:react and dev:electron, run each one in a different terminal and always run dev:react before dev:electron, or dev to run them in order automatically
+
+```
+npm run dev:react
+```
+```
+npm run dev:electron
+```
+
+or
+
+```
+npm run dev
+```
+
+Usage
+---
+To generate a project package run package
+
+```
+npm run package
+```
+
+Contributing
+---
+Pull requests are always welcome :)
+
+License
+---
+[https://choosealicense.com/licenses/mit/] MIT
