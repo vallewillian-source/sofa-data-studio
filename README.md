@@ -133,7 +133,7 @@ or
 npm run dev
 ```
 
-Usage
+Packaging
 ---
 To generate a project package run package
 
