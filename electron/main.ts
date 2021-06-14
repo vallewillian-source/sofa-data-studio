@@ -57,7 +57,6 @@ ipcMain.on('run-action', (event, arg) => {
 
   const actions = new ActionsController();
   const ret = actions.getInputs(apiName, endpointName);
-  console.log("RET", ret);
 
   event.returnValue = ret;
 

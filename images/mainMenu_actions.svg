@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24"
+   height="27"
+   viewBox="0 0 24 27"
+   fill="none"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="mainMenu_actions.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview13"
+     showgrid="false"
+     inkscape:zoom="31.925926"
+     inkscape:cx="12"
+     inkscape:cy="12.2471"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4" />
+  <g
+     clip-path="url(#clip0)"
+     id="g4">
+    <path
+       d="M6.3891 8.87176V7.02104C6.3891 5.54851 6.98024 4.1363 8.03246 3.09506C9.08469 2.05383 10.5118 1.46887 11.9999 1.46887V1.46887C13.488 1.46887 14.9151 2.05383 15.9673 3.09506C17.0195 4.1363 17.6107 5.54851 17.6107 7.02104V8.87176M11.9999 13.4986V20.9015V13.4986ZM15.7404 17.2H8.25937H15.7404ZM1.71345 8.87176C1.46544 8.87176 1.22758 8.96926 1.05221 9.1428C0.876843 9.31633 0.77832 9.5517 0.77832 9.79712V22.2895C0.77832 24.0384 2.28388 25.5283 4.05128 25.5283H19.9485C21.7159 25.5283 23.2215 24.1107 23.2215 22.3618V9.79712C23.2215 9.5517 23.1229 9.31633 22.9476 9.1428C22.7722 8.96926 22.5343 8.87176 22.2863 8.87176H1.71345Z"
+       stroke="#C5C5C5"
+       stroke-opacity="0.4"
+       stroke-width="2"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path2" />
+  </g>
+  <defs
+     id="defs9">
+    <clipPath
+       id="clip0">
+      <rect
+         width="24"
+         height="25.6"
+         fill="white"
+         transform="translate(0 0.698608)"
+         id="rect6" />
+    </clipPath>
+  </defs>
+</svg>

@@ -6,11 +6,11 @@ export const GRIDS = {
     main: { 
         nav: {
             background: COLORS.brand,
-            width: "300px"
+            width: "350px"
         },
         header: {
             background: COLORS.tertiary,
-            height: "60px"
+            height: "70px"
         },
         content: {
             background: COLORS.secondary
