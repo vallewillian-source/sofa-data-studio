@@ -1,7 +1,7 @@
 {
-  "name": "electron-react-typescript",
+  "name": "sofa-data-studio",
   "version": "1.0.0",
-  "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
+  "description": "Desktop application that allows non-technical users to tap into the data power of APIs and Databases.",
   "main": "./dist/main.js",
   "scripts": {
     "dev": "npm-run-all -p dev:react electron:serve",
@@ -18,7 +18,7 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
+  "author": "Willian Valle <williandovalle@icloud.com>",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -69,6 +69,8 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@mikro-orm/core": "^4.5.6",
+    "@mikro-orm/mongodb": "^4.5.6",
     "grommet": "^2.17.3",
     "grommet-icons": "^4.5.0",
     "react": "^16.13.1",
@@ -85,9 +87,9 @@
         ]
       }
     ],
-    "appId": "your.id",
+    "appId": "com.sofadatastudio",
     "mac": {
-      "category": "public.app-category.video"
+      "category": "public.app-category.business"
     },
     "directories": {
       "output": "packages"
