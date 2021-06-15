@@ -4,6 +4,7 @@
   "description": "Desktop application that allows non-technical users to tap into the data power of APIs and Databases.",
   "main": "./dist/main.js",
   "scripts": {
+    "dev:backend": "tsc backend/*.ts",
     "dev": "npm-run-all -p dev:react electron:serve",
     "dev:electron": "cross-env NODE_ENV=development webpack --config webpack/electron.webpack.js --mode development && npm run start:electron",
     "dev:react": "cross-env NODE_ENV=development webpack-dev-server --config webpack/react.webpack.js --mode development",
@@ -22,6 +23,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
@@ -39,6 +42,8 @@
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "commitizen": "^4.1.2",
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "3.2.0",

@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron';
 import { Box, Image, Button } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
@@ -5,7 +6,14 @@ import { Icons } from '../../styles/icons';
 import { ActionsMenuItem } from './actionsMenuItem';
 import { APITitle } from './apiTitle';
 
-export class ActionsMenu extends React.Component {
+type MyProps = { };
+type MyState = { actions: any };
+
+export class ActionsMenu extends React.Component<MyProps, MyState> {
+  constructor(props: Readonly<{}>) {
+    super(props);
+    //this.state = {actions: ipcRenderer.sendSync('actions:get', {})};
+  }
   render () {
     const ActionsMenuContainer = styled(Box)`
         padding: 17px 12px 32px 12px;
@@ -47,9 +55,9 @@ export class ActionsMenu extends React.Component {
         <ActionsMenuItem>Listar filas de um workspace</ActionsMenuItem>
 
         <NewActionButton 
-        primary
-        label="Adicionar Ação" 
-        icon={<Icons size="27" colors={['white']} icon="plus"/>}
+          primary
+          label="Adicionar Ação" 
+          icon={<Icons size="27" colors={['white']} icon="plus"/>}
         />
 
       </ActionsMenuContainer>

@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as url from 'url'
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
 
-import { ActionsController } from "../src/controllers/actionsController";
+//import { ActionsController } from "../src/controllers/actionsController";
 const { ipcMain } = require('electron');
 
 let mainWindow: Electron.BrowserWindow | null
@@ -49,16 +49,14 @@ app.on('ready', createWindow)
   })
 app.allowRendererProcessReuse = true
 
-ipcMain.on('run-action', (event, arg) => {
+ipcMain.on('actions:get', (event, arg) => {
   console.log(arg);
 
-  let {apiName, endpointName} = arg;
-  if(!arg.apiName || !arg.endpointName){ return false; }
+  //let {apiName, endpointName} = arg;
+  //if(!arg.apiName || !arg.endpointName){ return false; }
 
-  const actions = new ActionsController();
-  const ret = actions.getInputs(apiName, endpointName);
-
-  event.returnValue = ret;
+  //const actions = new ActionsController();
+  //event.returnValue = actions.getActions();
 
   return true;
 });
