@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron';
 import { Box, Image, Button } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
@@ -6,15 +5,26 @@ import { Icons } from '../../styles/icons';
 import { ActionsMenuItem } from './actionsMenuItem';
 import { APITitle } from './apiTitle';
 
+const { ipcRenderer } = require('electron')
+
 type MyProps = { };
 type MyState = { actions: any };
 
 export class ActionsMenu extends React.Component<MyProps, MyState> {
   constructor(props: Readonly<{}>) {
     super(props);
-    //this.state = {actions: ipcRenderer.sendSync('actions:get', {})};
+    this.state = { actions: null };
+
+    ipcRenderer.on('actions:getAll:response', (event, data) => {
+      this.setState({actions: data});
+      console.log("this.state", this.state);
+    });
+    ipcRenderer.send('actions:getAll', 'ping');
+    
+
   }
   render () {
+
     const ActionsMenuContainer = styled(Box)`
         padding: 17px 12px 32px 12px;
         border-radius: 10px;

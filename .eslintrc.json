@@ -22,7 +22,8 @@
   "plugins": [
     "react",
     "prettier",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "plugin:import/typescript"
   ],
   "rules": {
     "react/prop-types": "off",

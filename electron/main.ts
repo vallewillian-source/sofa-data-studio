@@ -1,10 +1,22 @@
-import { app, BrowserWindow } from 'electron'
-import * as path from 'path'
-import * as url from 'url'
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
+import 'babel-polyfill';
+import { app, BrowserWindow } from 'electron';
+import * as path from 'path';
+import * as url from 'url';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
-//import { ActionsController } from "../src/controllers/actionsController";
+import { ActionsController } from "./ActionsController";
+import { DB } from './models/DB';
+
 const { ipcMain } = require('electron');
+
+// Open connection to mongoDB
+DB.connect().then(function(){
+  
+  ipcMain.on('actions:getAll', async (event, arg) => {
+    event.reply('actions:getAll:response', await ActionsController.getAll())
+  });
+
+});
 
 let mainWindow: Electron.BrowserWindow | null
 
@@ -31,7 +43,13 @@ function createWindow () {
   }
 
   mainWindow.on('closed', () => {
-    mainWindow = null
+
+    // Destroy connection to mongoDB
+    DB.destroy().then(function(){
+      // Destroy window
+      mainWindow = null;
+    });
+
   })
 }
 
@@ -49,14 +67,3 @@ app.on('ready', createWindow)
   })
 app.allowRendererProcessReuse = true
 
-ipcMain.on('actions:get', (event, arg) => {
-  console.log(arg);
-
-  //let {apiName, endpointName} = arg;
-  //if(!arg.apiName || !arg.endpointName){ return false; }
-
-  //const actions = new ActionsController();
-  //event.returnValue = actions.getActions();
-
-  return true;
-});
