@@ -1,18 +1,13 @@
-
 import { Base } from './Base';
-import { IAPI } from './IApi';
-import { IEndpoint } from './IEndpoint';
 
 export class API extends Base {
 
-  constructor() {
-    super();
-  }
+  static collection:any;
 
-  /*getLoginEndpoint(){
+  getLoginEndpoint(endpoints:any, login_endpoint_id:any){
     
     try{
-        var endpoint = this.endpoints.filter((endpoint) =>  endpoint.id == this.login_endpoint_id)[0];
+        var endpoint = endpoints.filter((endpoint:any) =>  endpoint.id == login_endpoint_id)[0];
         if(endpoint){
             return endpoint;
         }else{
@@ -24,9 +19,9 @@ export class API extends Base {
     
   }
 
-  getEndpointById(id:string){
+  getEndpointById(endpoints:any, id:string){
     try{
-      var endpoint = this.endpoints.filter((endpoint) =>  endpoint.id == id)[0];
+      var endpoint = endpoints.filter((endpoint:any) =>  endpoint.id == id)[0];
       if(endpoint){
           return endpoint;
       }else{
@@ -35,7 +30,7 @@ export class API extends Base {
     }catch(err){
         return null;
     }
-  }*/
+  }
 
 
 }
