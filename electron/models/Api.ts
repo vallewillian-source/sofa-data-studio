@@ -4,10 +4,12 @@ export class API extends Base {
 
   static collection:any;
 
+  /* FIND Methods */
   static async findAll(){
     return this.find(this.collection, {});
   }
 
+  /* IN-MEMORY Methods */
   static getLoginEndpoint(endpoints:any, login_endpoint_id:any){
     
     try{

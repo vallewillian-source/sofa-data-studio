@@ -18,9 +18,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
     const APIMenuContainer = styled(Box)``
 
     const actionsList = this.props.actions?.map((action:IAction) =>
-    <>
       <ActionsMenuItem key={action._id.id} data={action}>{action.name}</ActionsMenuItem> 
-    </>
     );
 
     return (

@@ -19,11 +19,6 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
     super(props);
     this.state = { apis: null };
 
-    /*ipcRenderer.on('actions:getAll:response', (event, data) => {
-      this.setState({actions: data});
-    });
-    ipcRenderer.send('actions:getAll', 'ping');*/
-
     ipcRenderer.on('actions:getGroups:response', (event, data) => {
       this.setState({apis: data});
     });
@@ -53,7 +48,7 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
         padding-bottom: 4px;
         border-radius: 10px;
 
-        font-size: 16px;
+        font-size: 15px;
         cursor: pointer;
     `
 
@@ -71,8 +66,8 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
 
         <NewActionButton 
           primary
-          label="Adicionar Ação" 
-          icon={<Icons size="27" colors={['white']} icon="plus"/>}
+          label="Adicionar Ação"
+          icon={<Icons size="30" colors={['white']} icon="plus"/>}
         />
 
       </ActionsMenuContainer>
