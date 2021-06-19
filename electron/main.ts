@@ -13,7 +13,11 @@ const { ipcMain } = require('electron');
 DB.connect().then(function(){
   
   ipcMain.on('actions:getAll', async (event, arg) => {
-    event.reply('actions:getAll:response', await ActionsController.getAll())
+    event.reply('actions:getAll:response', await ActionsController.findAll())
+  });
+
+  ipcMain.on('actions:getGroups', async (event, arg) => {
+    event.reply('actions:getGroups:response', await ActionsController.getGroups())
   });
 
 });

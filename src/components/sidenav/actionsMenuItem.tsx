@@ -1,9 +1,10 @@
 import { Box, Image } from 'grommet'
 import React from 'react'
 import styled from 'styled-components'
+import { IAction } from '../../../electron/models/IAction';
 
 
-type MyProps = {};
+type MyProps = { key:string, data:IAction };
 type MyState = { isToggleOn: boolean };
 
 export class ActionsMenuItem extends React.Component<MyProps, MyState> {
@@ -18,7 +19,7 @@ export class ActionsMenuItem extends React.Component<MyProps, MyState> {
   handleClick () {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn,
-    }))
+    }));
   }
 
   render () {

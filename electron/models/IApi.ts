@@ -1,3 +1,4 @@
+import { IAction } from "./IAction";
 import { IEndpoint } from "./IEndpoint";
 
 export interface IAPI{
@@ -8,4 +9,5 @@ export interface IAPI{
 	urlref?: string;
 	auth_type?: string; // Bearer token, API Key, OAuth, etc.
 	login_endpoint_id: string;
+	actions?: IAction[]; // Used at Frontend, Define user's actions for each API.
 }

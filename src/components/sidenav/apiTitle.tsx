@@ -19,7 +19,7 @@ export class APITitle extends React.Component<MyProps, MyState> {
 
   render () {
     const APITitleContainer = styled(Box)`
-        padding-top: 20px;
+        padding-top: 20px; 
     `
 
     const APITag = styled(Box)`
@@ -37,7 +37,7 @@ export class APITitle extends React.Component<MyProps, MyState> {
         padding-top: 6px;
     `
 
-    const UnloggedIcon = styled(Image)`
+    const UnloggedIcon = styled(Box)`
         margin: 4px;
         margin-left: 10px;
         cursor: pointer;
@@ -63,7 +63,8 @@ export class APITitle extends React.Component<MyProps, MyState> {
         justify="start" 
         align-items="start" 
         justify-content="start" 
-        margin="none">
+        margin="none"
+        width="auto">
 
         <APITag
             background= {tagBg}
@@ -73,11 +74,17 @@ export class APITitle extends React.Component<MyProps, MyState> {
         </APITag>
 
         {!this.props.isLogged && <UnloggedIcon
-            fit="contain"
-            src="./actionsMenu_unlogged.svg"
             width="20px"
             height="20px"
-        />}
+            alignSelf="start"
+        >
+          <Image
+            fit="contain"
+            src="./actionsMenu_unlogged.svg"
+            alignSelf="start" 
+          />
+
+        </UnloggedIcon>}
 
       </APITitleContainer>
       <Separator/>

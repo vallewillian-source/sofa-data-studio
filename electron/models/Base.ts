@@ -35,4 +35,8 @@ export abstract class Base {
     static async count(collection:any, query:any){
       return await collection.countDocuments(query);
     }
+    
+    static async aggregate(collection:any, stages:any){
+      return await collection.aggregate(stages);
+    }
 }

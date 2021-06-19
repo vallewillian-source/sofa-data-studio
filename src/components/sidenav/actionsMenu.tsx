@@ -1,29 +1,42 @@
 import { Box, Image, Button } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
+import { IAction } from '../../../electron/models/IAction';
+import { IAPI } from '../../../electron/models/IApi';
 import { Icons } from '../../styles/icons';
 import { ActionsMenuItem } from './actionsMenuItem';
+import { APIMenu } from './apiMenu';
 import { APITitle } from './apiTitle';
 
 const { ipcRenderer } = require('electron')
 
 type MyProps = { };
-type MyState = { actions: any };
+type MyState = { apis: IAPI[] | null };
 
 export class ActionsMenu extends React.Component<MyProps, MyState> {
+
   constructor(props: Readonly<{}>) {
     super(props);
-    this.state = { actions: null };
+    this.state = { apis: null };
 
-    ipcRenderer.on('actions:getAll:response', (event, data) => {
+    /*ipcRenderer.on('actions:getAll:response', (event, data) => {
       this.setState({actions: data});
-      console.log("this.state", this.state);
     });
-    ipcRenderer.send('actions:getAll', 'ping');
-    
+    ipcRenderer.send('actions:getAll', 'ping');*/
 
+    ipcRenderer.on('actions:getGroups:response', (event, data) => {
+      this.setState({apis: data});
+    });
+    ipcRenderer.send('actions:getGroups', 'ping');
+    
+    
   }
+
   render () {
+
+    const apisList = this.state.apis?.map((api:IAPI) =>
+      <APIMenu name={api.name} actions={api.actions}/>
+    );
 
     const ActionsMenuContainer = styled(Box)`
         padding: 17px 12px 32px 12px;
@@ -47,22 +60,14 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
     return (
       <ActionsMenuContainer 
         justify="start" 
-        pad="medium"
+        pad="none"
         align-items="start"
         align="start" 
         background="#C4C4C4" 
         direction="column" 
         margin="small">
 
-        <APITitle isLogged={true} tag="1">Rocketchat</APITitle>
-
-        <ActionsMenuItem>Listar usuários</ActionsMenuItem>
-        <ActionsMenuItem>Listar filas de um workspace</ActionsMenuItem>
-
-        <APITitle isLogged={false} tag="2">API 1</APITitle>
-
-        <ActionsMenuItem>Listar usuários</ActionsMenuItem>
-        <ActionsMenuItem>Listar filas de um workspace</ActionsMenuItem>
+        {apisList}
 
         <NewActionButton 
           primary
