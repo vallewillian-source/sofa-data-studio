@@ -6,12 +6,15 @@ import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electro
 
 import { ActionsController } from "./ActionsController";
 import { DB } from './models/DB';
+import { AuthController } from './AuthController';
+import { IAPI } from './models/IApi';
 
 const { ipcMain } = require('electron');
 
 // Open connection to mongoDB
 DB.connect().then(function(){
   
+  /* Actions */
   ipcMain.on('actions:getAll', async (event, arg) => {
     event.reply('actions:getAll:response', await ActionsController.findAll())
   });
@@ -20,14 +23,23 @@ DB.connect().then(function(){
     event.reply('actions:getGroups:response', await ActionsController.getGroups())
   });
 
+  /* Auth */
+  ipcMain.on('auth:getLoginEndpoint', async (event, api:IAPI) => {
+    event.reply('auth:getLoginEndpoint:response', await AuthController.getLoginEndpoint(api))
+  });
+
+  ipcMain.on('auth:processLogin', async (event, response:ILoginResponse[], api:IAPI) => {
+    event.reply('auth:processLogin:response', await AuthController.processLogin(response, api))
+  });
+
 });
 
 let mainWindow: Electron.BrowserWindow | null
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 1100,
-    height: 700,
+    width: 1200,
+    height: 800,
     backgroundColor: '#221135',
     webPreferences: {
       nodeIntegration: true

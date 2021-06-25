@@ -1,12 +1,9 @@
 import { Box, Image, Button } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
-import { IAction } from '../../../electron/models/IAction';
 import { IAPI } from '../../../electron/models/IApi';
 import { Icons } from '../../styles/icons';
-import { ActionsMenuItem } from './actionsMenuItem';
 import { APIMenu } from './apiMenu';
-import { APITitle } from './apiTitle';
 
 const { ipcRenderer } = require('electron')
 
@@ -30,7 +27,7 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
   render () {
 
     const apisList = this.state.apis?.map((api:IAPI) =>
-      <APIMenu name={api.name} actions={api.actions}/>
+      <APIMenu key={api._id.id} api={api}/>
     );
 
     const ActionsMenuContainer = styled(Box)`
@@ -70,9 +67,7 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
           icon={<Icons size="30" colors={['white']} icon="plus"/>}
         />
 
-      </ActionsMenuContainer>
-
-      
+      </ActionsMenuContainer>      
     )
   }
 }

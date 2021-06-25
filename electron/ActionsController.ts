@@ -4,11 +4,19 @@ import { IAPI } from "./models/IApi";
 
 export class ActionsController{
 
+    /**
+     * Returns all registered Actions.
+     * @returns IAction[]
+     */
     static async findAll(){
         const data = await Action.findAll();
         return await data.toArray();
     }
 
+    /**
+     * Returns a list of all APIs associated with logged user actions.
+     * @returns IAPI[]
+     */
     static async getGroups(){
         const APISData = await API.findAll();
         let APIs:IAPI[] = await APISData.toArray();
@@ -20,8 +28,6 @@ export class ActionsController{
             
             data.push(api);
         }
-
-        console.log("data", data);
 
         return data;
     }

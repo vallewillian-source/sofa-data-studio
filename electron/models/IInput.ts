@@ -2,9 +2,9 @@ import { IEntity } from "./IEntity";
 
 export interface IInput{
 	_id?: any;
-	internal_name: string;
+	id: string;
 	name: string;
-	type: string; // high-level types
+	type: string; // high-level types, at InputDefines.ts
 	description: string;
 	is_required: boolean;
 	preprocess_function?: string;

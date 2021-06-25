@@ -4,6 +4,7 @@ import { IEndpoint } from "./IEndpoint";
 export interface IAPI{
 	_id?: any;
 	name: string;
+	tag?: string;
 	description: string;
 	endpoints: IEndpoint[];
 	urlref?: string;

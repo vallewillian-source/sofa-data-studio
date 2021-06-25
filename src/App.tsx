@@ -14,6 +14,7 @@ const theme = {
   global: {
     colors:{
       brand: "#26223E",
+      "light": "#C4C4C4",
       "accent-1": "#6FFFB0",
       "accent-2": "#7FFFB0",
       "accent-3": "#8FFFB0",
@@ -25,7 +26,7 @@ const theme = {
       focus: "gray",
     },
     font: {
-      family: 'Roboto',
+      family: 'Arial',
       size: '18px',
       height: '20px',
     },

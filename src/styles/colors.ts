@@ -4,7 +4,7 @@ export const COLORS = {
     tertiary: '#2A193F',
 
     // API & Endpoint tags
-    tag1: "#ED5D00",
+    tag1: "#E30069",
     tag1Text: "white",
 
     tag2: "#0021ED",

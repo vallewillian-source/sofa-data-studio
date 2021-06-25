@@ -1,34 +1,36 @@
 import { Box, Image } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
-import { COLORS } from '../../styles/colors';
+import { IAPI } from '../../../electron/models/IApi';
+import { APITag } from '../misc/apiTag';
+import { LoginModal } from '../modals/login/loginModal';
 
 
-type MyProps = { tag?: string, isLogged: boolean };
-type MyState = { isLogged: boolean };
+type MyProps = { api: IAPI, isLogged: boolean};
+type MyState = { isLogged: boolean, isModalOpen: boolean  };
 
 export class APITitle extends React.Component<MyProps, MyState> {
 
+
   constructor (props: any) {
     super(props);
+    this.state = { isLogged: props.isLogged, isModalOpen: false };
 
-    // TODO: Implement backend call for login information
-    this.state = { isLogged: props.isLogged }
+    this.loginButton = this.loginButton.bind(this);
+    this.closeLoginModal = this.closeLoginModal.bind(this);
+  }
 
+  loginButton(){
+    this.setState({isModalOpen: true});
+  }
+
+  closeLoginModal(){
+    this.setState({isModalOpen: false});
   }
 
   render () {
     const APITitleContainer = styled(Box)`
         padding-top: 20px; 
-    `
-
-    const APITag = styled(Box)`
-        padding: 4px 16px;
-        border-radius: 20px;
-        color: ${props => props.color || "white"};
-        font-size: 14px;
-        letter-spacing: 0.8px;
-        font-weight: 500;
     `
 
     const Separator = styled(Box)`
@@ -42,22 +44,12 @@ export class APITitle extends React.Component<MyProps, MyState> {
         margin-left: 10px;
         cursor: pointer;
     `
-    let tagBg;
-    let tagColor;
-
-    if(this.props.tag == "1"){
-      tagBg = COLORS.tag1;
-      tagColor = COLORS.tag1Text;
-    }else if(this.props.tag == "2"){
-      tagBg = COLORS.tag2;
-      tagColor = COLORS.tag2Text;
-    }else if(this.props.tag == "3"){
-      tagBg = COLORS.tag3;
-      tagColor = COLORS.tag3Text;
-    }
+    
 
     return (
     <>
+      {this.state.isModalOpen && <LoginModal api={this.props.api} onClose={this.closeLoginModal}/>}
+
       <APITitleContainer 
         direction="row" 
         justify="start" 
@@ -66,10 +58,7 @@ export class APITitle extends React.Component<MyProps, MyState> {
         margin="none"
         width="auto">
 
-        <APITag
-            background= {tagBg}
-            color={tagColor}
-        >
+        <APITag tag={this.props.api.tag}>
             {this.props.children}
         </APITag>
 
@@ -77,11 +66,12 @@ export class APITitle extends React.Component<MyProps, MyState> {
             width="20px"
             height="20px"
             alignSelf="start"
+            onClick={this.loginButton}
         >
           <Image
             fit="contain"
             src="./actionsMenu_unlogged.svg"
-            alignSelf="start" 
+            alignSelf="start"
           />
 
         </UnloggedIcon>}
@@ -91,4 +81,5 @@ export class APITitle extends React.Component<MyProps, MyState> {
     </>
     )
   }
+
 }

@@ -1,4 +1,6 @@
 import { Base } from './Base';
+import { IAPI } from './IApi';
+import { IEndpoint } from './IEndpoint';
 
 export class API extends Base {
 
@@ -10,16 +12,16 @@ export class API extends Base {
   }
 
   /* IN-MEMORY Methods */
-  static getLoginEndpoint(endpoints:any, login_endpoint_id:any){
-    
+  static getLoginEndpoint(api:IAPI){
     try{
-        var endpoint = endpoints.filter((endpoint:any) =>  endpoint.id == login_endpoint_id)[0];
+        var endpoint = api.endpoints.filter((endpoint:IEndpoint) =>  endpoint.id == api.login_endpoint_id)[0];
         if(endpoint){
             return endpoint;
         }else{
             return null;
         }
     }catch(err){
+        console.log("Err on getLoginEndpoint", err);
         return null;
     }
     
@@ -34,6 +36,7 @@ export class API extends Base {
           return null;
       }
     }catch(err){
+      console.log("Err on getEndpointById", err);
         return null;
     }
   }

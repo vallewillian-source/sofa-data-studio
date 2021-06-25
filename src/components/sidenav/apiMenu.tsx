@@ -2,10 +2,11 @@ import { Box, Image } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
 import { IAction } from '../../../electron/models/IAction';
+import { IAPI } from '../../../electron/models/IApi';
 import { ActionsMenuItem } from './actionsMenuItem';
 import { APITitle } from './apiTitle';
 
-type MyProps = { name:string, actions:IAction[] | undefined };
+type MyProps = { api: IAPI };
 type MyState = { };
 
 export class APIMenu extends React.Component<MyProps, MyState> {
@@ -17,7 +18,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
   render () {
     const APIMenuContainer = styled(Box)``
 
-    const actionsList = this.props.actions?.map((action:IAction) =>
+    const actionsList = this.props.api.actions?.map((action:IAction) =>
       <ActionsMenuItem key={action._id.id} data={action}>{action.name}</ActionsMenuItem> 
     );
 
@@ -30,7 +31,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
         margin="none"
         width="full">
 
-            <APITitle isLogged={false} tag="2">{this.props.name}</APITitle>
+            <APITitle isLogged={false} api={this.props.api}>{this.props.api.name}</APITitle>
             {actionsList}
 
       </APIMenuContainer>

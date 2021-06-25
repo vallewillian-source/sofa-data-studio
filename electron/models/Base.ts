@@ -8,12 +8,12 @@ export abstract class Base {
       return await collection.findOne(query, options);
     }
 
-    static async insertMany(collection:any, document:any){
+    static async insertMany(collection:any, document:any[]){
       return await collection.insertMany(document);
     }
 
-    static async insert(collection:any, document:any){
-      return await collection.insert(document);
+    static async insertOne(collection:any, document:any){
+      return await collection.insertOne(document);
     }
 
     static async updateMany(collection:any, filter:any, update:any, options?:any){
