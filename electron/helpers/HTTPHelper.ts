@@ -12,6 +12,7 @@ export class HTTP{
               console.log(error.response.data);
               console.log(error.response.status);
               console.log("Headers:",error.response.headers);
+              return error;
             }
           });
         return response;
@@ -28,6 +29,7 @@ export class HTTP{
               console.log(error.response.data);
               console.log(error.response.status);
               console.log("Headers:",error.response.headers);
+              return error;
             }
           });
         return response;
@@ -44,6 +46,7 @@ export class HTTP{
               console.log(error.response.data);
               console.log(error.response.status);
               console.log(error.response.headers);
+              return error;
             }
           });
         return response;
@@ -60,6 +63,7 @@ export class HTTP{
               console.log(error.response.data);
               console.log(error.response.status);
               console.log(error.response.headers);
+              return error;
             }
           });
         return response;

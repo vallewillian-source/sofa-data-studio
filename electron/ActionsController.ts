@@ -1,5 +1,6 @@
 import { Action } from "./models/Action";
 import { API } from "./models/Api";
+import { Conn } from "./models/Conn";
 import { IAPI } from "./models/IApi";
 
 export class ActionsController{
@@ -23,6 +24,14 @@ export class ActionsController{
         let data:IAPI[] = [];
 
         for(let api of APIs){
+
+            // Associating conn
+            const conn = await Conn.findByAPI(api);
+            if(conn){
+                api.conn = conn;
+            }
+            
+            // Association actions
             let actionsData = await Action.findByAPI(api._id);
             api.actions = await actionsData.toArray();
             

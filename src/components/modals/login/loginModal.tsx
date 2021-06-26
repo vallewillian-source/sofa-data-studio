@@ -10,7 +10,7 @@ import { ModalTitle } from '../modalTitle'
 
 const { ipcRenderer } = require('electron')
 
-type MyProps = { api: IAPI; onClose: any }
+type MyProps = { api: IAPI; onClose: any, setLogged: any }
 type MyState = { fields: IParam[] }
 export class LoginModal extends React.Component<MyProps, MyState> {
   isMounted: boolean = false
@@ -35,9 +35,27 @@ export class LoginModal extends React.Component<MyProps, MyState> {
     ipcRenderer.on(
       'auth:processLogin:response',
       (event, data: any) => {
-        console.log('processLogin Response', data);
+        if(data.errCode){
+
+          // There is a error
+          // TODO Map other error types and improve alert system
+          if(data.errCode == "401"){
+            alert("Por favor, verifique suas credenciais e tente novamente.");
+          }else{
+            alert("Ocorreu um erro desconhecido ao processar o seu login.");
+          }
+          
+        }else{
+
+          // Setting api as logged and closing modal
+          this.props.setLogged(true);
+
+          console.log('processLogin Response', data);
+        }
+        
       }
     );
+
     ipcRenderer.send('auth:processLogin', response, this.props.api);
 
   }

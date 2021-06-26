@@ -14,8 +14,6 @@ export class APITag extends React.Component<MyProps, MyState> {
 
   render(){
 
-    
-
     let tagBg: string;
     let tagColor: string;
 

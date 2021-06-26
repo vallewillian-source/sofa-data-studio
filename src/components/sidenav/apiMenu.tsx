@@ -31,7 +31,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
         margin="none"
         width="full">
 
-            <APITitle isLogged={false} api={this.props.api}>{this.props.api.name}</APITitle>
+            <APITitle api={this.props.api}>{this.props.api.name}</APITitle>
             {actionsList}
 
       </APIMenuContainer>

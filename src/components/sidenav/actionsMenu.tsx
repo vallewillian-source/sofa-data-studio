@@ -21,7 +21,6 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
     });
     ipcRenderer.send('actions:getGroups', 'ping');
     
-    
   }
 
   render () {
@@ -70,4 +69,5 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
       </ActionsMenuContainer>      
     )
   }
+
 }

@@ -6,7 +6,7 @@ import { APITag } from '../misc/apiTag';
 import { LoginModal } from '../modals/login/loginModal';
 
 
-type MyProps = { api: IAPI, isLogged: boolean};
+type MyProps = { api: IAPI};
 type MyState = { isLogged: boolean, isModalOpen: boolean  };
 
 export class APITitle extends React.Component<MyProps, MyState> {
@@ -14,10 +14,17 @@ export class APITitle extends React.Component<MyProps, MyState> {
 
   constructor (props: any) {
     super(props);
-    this.state = { isLogged: props.isLogged, isModalOpen: false };
+
+    let isLogged:boolean = false;
+    if(this.props.api.conn){
+      isLogged = true;
+    }
+
+    this.state = { isLogged, isModalOpen: false };
 
     this.loginButton = this.loginButton.bind(this);
     this.closeLoginModal = this.closeLoginModal.bind(this);
+    this.setLogged = this.setLogged.bind(this);
   }
 
   loginButton(){
@@ -26,6 +33,10 @@ export class APITitle extends React.Component<MyProps, MyState> {
 
   closeLoginModal(){
     this.setState({isModalOpen: false});
+  }
+
+  setLogged(isLogged:boolean){
+    this.setState({isModalOpen: false, isLogged});
   }
 
   render () {
@@ -44,11 +55,14 @@ export class APITitle extends React.Component<MyProps, MyState> {
         margin-left: 10px;
         cursor: pointer;
     `
-    
 
     return (
     <>
-      {this.state.isModalOpen && <LoginModal api={this.props.api} onClose={this.closeLoginModal}/>}
+      {this.state.isModalOpen && <LoginModal 
+      api={this.props.api} 
+      onClose={this.closeLoginModal} 
+      setLogged={this.setLogged} 
+      />}
 
       <APITitleContainer 
         direction="row" 
@@ -62,7 +76,7 @@ export class APITitle extends React.Component<MyProps, MyState> {
             {this.props.children}
         </APITag>
 
-        {!this.props.isLogged && <UnloggedIcon
+        {!this.state.isLogged && <UnloggedIcon
             width="20px"
             height="20px"
             alignSelf="start"

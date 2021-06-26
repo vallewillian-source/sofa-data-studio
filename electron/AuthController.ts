@@ -89,6 +89,10 @@ export class AuthController {
       )
     }
 
+    if(loginResponse.status != 200){
+      return {errCode: loginResponse.response.status, err: loginResponse.response.statusText};
+    }
+
     // Getting login data from output
     let OutSchema: IOutput[] = loginEndpoint.out_schema
 
@@ -117,6 +121,6 @@ export class AuthController {
 
     await Conn.insertNew(newConn)
 
-    return 'ok'
+    return 1;
   }
 }
