@@ -6,11 +6,12 @@ import { IEndpoint } from '../../../../electron/models/IEndpoint'
 import { IParam } from '../../../../electron/models/IParam'
 import { FormComponent } from '../../forms/formComponent'
 import { APITag } from '../../misc/apiTag'
+import { ActionsMenu } from '../../sidenav/actionsMenu'
 import { ModalTitle } from '../modalTitle'
 
 const { ipcRenderer } = require('electron')
 
-type MyProps = { api: IAPI; onClose: any, setLogged: any }
+type MyProps = { api: IAPI; onClose: any, actionsMenu: ActionsMenu }
 type MyState = { fields: IParam[] }
 export class LoginModal extends React.Component<MyProps, MyState> {
   isMounted: boolean = false
@@ -47,8 +48,10 @@ export class LoginModal extends React.Component<MyProps, MyState> {
           
         }else{
 
-          // Setting api as logged and closing modal
-          this.props.setLogged(true);
+          this.props.actionsMenu.updateLoggedAPI(this.props.api, data);
+          
+          // Closing modal
+          this.props.onClose();
 
           console.log('processLogin Response', data);
         }

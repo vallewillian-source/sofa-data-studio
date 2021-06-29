@@ -11,7 +11,7 @@ var ObjectId = require('mongodb').ObjectID
 
 export class AuthController {
   static async getLoginEndpoint (api: IAPI) {
-    let loginEndpoint = API.getLoginEndpoint(api)
+    let loginEndpoint = API.MemGetLoginEndpoint(api)
     if (!loginEndpoint) {
       throw Error('login endpoint not found')
     }
@@ -121,6 +121,6 @@ export class AuthController {
 
     await Conn.insertNew(newConn)
 
-    return 1;
+    return newConn;
   }
 }

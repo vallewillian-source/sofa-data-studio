@@ -3,10 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { IAction } from '../../../electron/models/IAction';
 import { IAPI } from '../../../electron/models/IApi';
+import { ActionsMenu } from './actionsMenu';
 import { ActionsMenuItem } from './actionsMenuItem';
 import { APITitle } from './apiTitle';
 
-type MyProps = { api: IAPI };
+type MyProps = { api: IAPI, actionsMenu:ActionsMenu};
 type MyState = { };
 
 export class APIMenu extends React.Component<MyProps, MyState> {
@@ -19,7 +20,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
     const APIMenuContainer = styled(Box)``
 
     const actionsList = this.props.api.actions?.map((action:IAction) =>
-      <ActionsMenuItem key={action._id.id} data={action}>{action.name}</ActionsMenuItem> 
+      <ActionsMenuItem key={action._id.id} api={this.props.api} data={action}>{action.name}</ActionsMenuItem> 
     );
 
     return (
@@ -31,7 +32,7 @@ export class APIMenu extends React.Component<MyProps, MyState> {
         margin="none"
         width="full">
 
-            <APITitle api={this.props.api}>{this.props.api.name}</APITitle>
+            <APITitle api={this.props.api} actionsMenu={this.props.actionsMenu}>{this.props.api.name}</APITitle>
             {actionsList}
 
       </APIMenuContainer>

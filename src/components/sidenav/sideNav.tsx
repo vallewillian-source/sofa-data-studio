@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { ActionsMenu } from './actionsMenu';
 import { MainMenu } from './MainMenu';
 
-export class SideNav extends React.Component {
+type MyProps = { };
+type MyState = { };
+
+export class SideNav extends React.Component<MyProps, MyState>  {
   render () {
     const SideNavContainer = styled(Box)`
         padding-top: 10px;

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { IAPI } from '../../../electron/models/IApi';
 import { APITag } from '../misc/apiTag';
 import { LoginModal } from '../modals/login/loginModal';
+import { ActionsMenu } from './actionsMenu';
 
-
-type MyProps = { api: IAPI};
+type MyProps = { api: IAPI, actionsMenu:ActionsMenu};
 type MyState = { isLogged: boolean, isModalOpen: boolean  };
 
 export class APITitle extends React.Component<MyProps, MyState> {
@@ -24,7 +24,6 @@ export class APITitle extends React.Component<MyProps, MyState> {
 
     this.loginButton = this.loginButton.bind(this);
     this.closeLoginModal = this.closeLoginModal.bind(this);
-    this.setLogged = this.setLogged.bind(this);
   }
 
   loginButton(){
@@ -33,10 +32,6 @@ export class APITitle extends React.Component<MyProps, MyState> {
 
   closeLoginModal(){
     this.setState({isModalOpen: false});
-  }
-
-  setLogged(isLogged:boolean){
-    this.setState({isModalOpen: false, isLogged});
   }
 
   render () {
@@ -61,7 +56,7 @@ export class APITitle extends React.Component<MyProps, MyState> {
       {this.state.isModalOpen && <LoginModal 
       api={this.props.api} 
       onClose={this.closeLoginModal} 
-      setLogged={this.setLogged} 
+      actionsMenu={this.props.actionsMenu}
       />}
 
       <APITitleContainer 

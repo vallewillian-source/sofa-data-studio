@@ -1,6 +1,7 @@
 import { Action } from "./models/Action";
 import { API } from "./models/Api";
 import { Conn } from "./models/Conn";
+import { IAction } from "./models/IAction";
 import { IAPI } from "./models/IApi";
 
 export class ActionsController{
@@ -33,7 +34,11 @@ export class ActionsController{
             
             // Association actions
             let actionsData = await Action.findByAPI(api._id);
-            api.actions = await actionsData.toArray();
+            api.actions = await actionsData.toArray() as IAction[];
+
+            for(let action of api.actions){
+                action.endpoint = await API.MemGetEndpointById(api.endpoints, action.endpointId);
+            }
             
             data.push(api);
         }

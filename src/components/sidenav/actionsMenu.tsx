@@ -2,19 +2,20 @@ import { Box, Image, Button } from 'grommet';
 import React from 'react';
 import styled from 'styled-components';
 import { IAPI } from '../../../electron/models/IApi';
+import { IConn } from '../../../electron/models/IConn';
 import { Icons } from '../../styles/icons';
 import { APIMenu } from './apiMenu';
 
-const { ipcRenderer } = require('electron')
+const { ipcRenderer } = require('electron');
 
 type MyProps = { };
-type MyState = { apis: IAPI[] | null };
+type MyState = { apis: IAPI[]};
 
 export class ActionsMenu extends React.Component<MyProps, MyState> {
 
-  constructor(props: Readonly<{}>) {
+  constructor(props: any) {
     super(props);
-    this.state = { apis: null };
+    this.state = { apis: [] };
 
     ipcRenderer.on('actions:getGroups:response', (event, data) => {
       this.setState({apis: data});
@@ -25,10 +26,14 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
 
   render () {
 
-    const apisList = this.state.apis?.map((api:IAPI) =>
-      <APIMenu key={api._id.id} api={api}/>
-    );
-
+    let apisList = null;
+    
+    if(this.state.apis){
+      apisList = this.state.apis?.map((api:IAPI) =>
+        <APIMenu key={api._id.id} api={api} actionsMenu={this}/>
+      );
+    }
+  
     const ActionsMenuContainer = styled(Box)`
         padding: 17px 12px 32px 12px;
         border-radius: 10px;
@@ -68,6 +73,15 @@ export class ActionsMenu extends React.Component<MyProps, MyState> {
 
       </ActionsMenuContainer>      
     )
+  }
+
+  updateLoggedAPI(searchApi:IAPI, conn:IConn){
+    for(let api of this.state.apis){
+      if(api == searchApi){
+        api.conn = conn;
+      }
+    }
+    this.setState({apis: this.state.apis});
   }
 
 }

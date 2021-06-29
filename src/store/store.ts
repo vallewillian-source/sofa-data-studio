@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import apiReducer from './reducers/api.reducer'
+import { routerReducer } from './reducers/router.reducer'
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
-        apis: apiReducer
+        router: routerReducer
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }),
   })
 
 
