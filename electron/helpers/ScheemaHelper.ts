@@ -103,7 +103,6 @@ export class Scheema {
     }
 
     this.process(processQueue)
-
     return this.entity
   }
 }

@@ -1,4 +1,4 @@
-import { Layer, Text } from 'grommet'
+import { Box, Layer, Text } from 'grommet'
 import React from 'react'
 import styled from 'styled-components'
 import { IAPI } from '../../../../electron/models/IApi'
@@ -24,14 +24,6 @@ export class LoginModal extends React.Component<MyProps, MyState> {
   }
 
   onSubmit(data:any){
-    
-    const elements:any = data.target.elements;
-    let response:any = [];
-    for(let element of elements){
-      if(element.title?.length > 0 && element.value?.length > 0){
-        response.push({inputId: element.title, value: element.value});
-      }
-    }
 
     ipcRenderer.on(
       'auth:processLogin:response',
@@ -53,13 +45,12 @@ export class LoginModal extends React.Component<MyProps, MyState> {
           // Closing modal
           this.props.onClose();
 
-          console.log('processLogin Response', data);
         }
         
       }
     );
 
-    ipcRenderer.send('auth:processLogin', response, this.props.api);
+    ipcRenderer.send('auth:processLogin', data.value, this.props.api);
 
   }
 
@@ -92,8 +83,9 @@ export class LoginModal extends React.Component<MyProps, MyState> {
         </LoginModalText>
 
         <APITag tag={this.props.api.tag}>{this.props.api.name}</APITag>
-
-        <FormComponent onSubmit={this.onSubmit} params={this.state.fields}/>
+        <Box margin={{ top: '20px' }}>
+          <FormComponent onSubmit={this.onSubmit} params={this.state.fields}/>
+        </Box>
         
       </LoginModalContainer>
     )

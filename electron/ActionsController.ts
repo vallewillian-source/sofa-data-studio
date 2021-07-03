@@ -1,8 +1,11 @@
+import { APIController } from "./APIController";
+import { Scheema } from "./helpers/ScheemaHelper";
 import { Action } from "./models/Action";
 import { API } from "./models/Api";
 import { Conn } from "./models/Conn";
 import { IAction } from "./models/IAction";
 import { IAPI } from "./models/IApi";
+import { IEndpoint } from "./models/IEndpoint";
 
 export class ActionsController{
 
@@ -44,6 +47,25 @@ export class ActionsController{
         }
 
         return data;
+    }
+
+
+    /**
+     * Execute an endpoint action, calling API endpoint and prepare data.
+     * @param response Object with input data filled by user
+     * @param endpoint Endpoint that will be called
+     * @param api API of endpoint, logged and filled with 'conn' parameter 
+     */
+    static async processEndpoint(response:any, endpoint: IEndpoint, api:IAPI){
+        
+        // Call API Endpoint
+        const ActionResponse = await APIController.process(endpoint, api, response);
+
+        // Mix endpoint response and output scheema
+        const formattedResponse = Scheema.getResponses(endpoint.out_schema, ActionResponse.data);
+
+        return formattedResponse;
+
     }
     
 }

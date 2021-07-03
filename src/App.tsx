@@ -33,6 +33,38 @@ const theme = {
       height: '20px',
     },
   },
+  textInput: {
+    extend: () => `
+      font-size: 20px;
+      background: #E2E2E2;
+      border-radius: 10px;
+
+      &:focus {
+        box-shadow: none;
+        border-color: initial;
+      }
+    `,
+    container: {
+      extend: () => ``,
+    },
+    placeholder: {
+      extend: () => ``,
+    },
+    suggestions: {
+      extend: () => ``,
+    },
+  },
+  formField:{
+    label: {
+      "as": "b",
+      "size": "medium",
+      "margin": {
+        "vertical": "small",
+        "horizontal": "xsmall"
+      }
+    }
+  }
+
 };
 
 

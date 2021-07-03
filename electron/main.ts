@@ -8,6 +8,7 @@ import { ActionsController } from "./ActionsController";
 import { DB } from './models/DB';
 import { AuthController } from './AuthController';
 import { IAPI } from './models/IApi';
+import { IEndpoint } from './models/IEndpoint';
 
 const { ipcMain } = require('electron');
 
@@ -23,13 +24,17 @@ DB.connect().then(function(){
     event.reply('actions:getGroups:response', await ActionsController.getGroups())
   });
 
+  ipcMain.on('auth:processLogin', async (event, response:ILoginResponse[], api:IAPI) => {
+    event.reply('auth:processLogin:response', await AuthController.processBearerLogin(response, api))
+  });
+
   /* Auth */
   ipcMain.on('auth:getLoginEndpoint', async (event, api:IAPI) => {
     event.reply('auth:getLoginEndpoint:response', await AuthController.getLoginEndpoint(api))
   });
 
-  ipcMain.on('auth:processLogin', async (event, response:ILoginResponse[], api:IAPI) => {
-    event.reply('auth:processLogin:response', await AuthController.processLogin(response, api))
+  ipcMain.on('action:process', async (event, response:any, endpoint:IEndpoint, api:IAPI) => {
+    event.reply('action:process:response', await ActionsController.processEndpoint(response, endpoint, api))
   });
 
 });

@@ -1,8 +1,7 @@
-import { HTTP } from './helpers/HTTPHelper'
+import { APIController } from './APIController'
 import { Scheema } from './helpers/ScheemaHelper'
 import { API } from './models/Api'
 import { Conn } from './models/Conn'
-import { PARAM_METHODS } from './models/defines/paramDefines'
 import { IAPI } from './models/IApi'
 import { IConn } from './models/IConn'
 import { IOutput } from './models/IOutput'
@@ -19,79 +18,10 @@ export class AuthController {
     return loginEndpoint
   }
 
-  static async processLogin (response: ILoginResponse[], api: IAPI) {
+  static async processBearerLogin (response: any, api: IAPI) {
     const loginEndpoint = await this.getLoginEndpoint(api)
 
-    var QueryStringResponses: any = {}
-    var HEADERResponses: any = {}
-    var BODYResponses: any = {}
-
-    for (let param of loginEndpoint.in_params) {
-      // getting user data for param
-      let inputsData = []
-      for (let input of param.inputs) {
-        const responseItem = response.find(
-          (item: ILoginResponse) => item.inputId == input.id
-        )
-        inputsData.push(responseItem?.value)
-      }
-
-      // TODO agregation logic
-
-      // Applying default agregation process
-      var paramResponse
-      if (param.inputs.length > 1) {
-        paramResponse = inputsData.join(',')
-      } else {
-        paramResponse = inputsData[0]
-      }
-
-      // writing to responses objects
-      if (param.method == PARAM_METHODS.QUERY_STRING) {
-        QueryStringResponses[param.internal_name] = paramResponse
-      } else if (param.method == PARAM_METHODS.HEADER) {
-        HEADERResponses[param.internal_name] = paramResponse
-      } else if (param.method == PARAM_METHODS.BODY) {
-        BODYResponses[param.internal_name] = paramResponse
-      } else {
-        console.log('..unsuported parameter type', param)
-      }
-    } // End param loop
-
-    // Call login endpoint and extract data
-    let loginResponse: any
-    if (loginEndpoint.method == 'POST') {
-      loginResponse = await HTTP.post(
-        loginEndpoint.uri,
-        QueryStringResponses,
-        BODYResponses,
-        HEADERResponses
-      )
-    } else if (loginEndpoint.method == 'GET') {
-      loginResponse = await HTTP.get(
-        loginEndpoint.uri,
-        QueryStringResponses,
-        HEADERResponses
-      )
-    } else if (loginEndpoint.method == 'PUT') {
-      loginResponse = await HTTP.put(
-        loginEndpoint.uri,
-        QueryStringResponses,
-        BODYResponses,
-        HEADERResponses
-      )
-    } else if (loginEndpoint.method == 'DELETE') {
-      loginResponse = await HTTP.delete(
-        loginEndpoint.uri,
-        QueryStringResponses,
-        BODYResponses,
-        HEADERResponses
-      )
-    }
-
-    if(loginResponse.status != 200){
-      return {errCode: loginResponse.response.status, err: loginResponse.response.statusText};
-    }
+    const loginResponse = await APIController.process(loginEndpoint, api, response)
 
     // Getting login data from output
     let OutSchema: IOutput[] = loginEndpoint.out_schema
@@ -121,6 +51,6 @@ export class AuthController {
 
     await Conn.insertNew(newConn)
 
-    return newConn;
+    return newConn
   }
 }

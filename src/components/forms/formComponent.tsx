@@ -45,10 +45,10 @@ export class FormComponent extends React.Component<MyProps, MyState> {
           }}
           onSubmit={this.props.onSubmit}
         >
-          <Box margin={{ top: '20px' }}>{ParamsList}</Box> 
+          <Box width="full">{ParamsList}</Box> 
           
-          <Box direction='row' gap='medium' margin={{ top: '40px' }}>
-            <SubmitButton type='submit' primary label='Enviar' />
+          <Box direction='row' align="end" gap='medium' margin={{ top: '40px' }}>
+            <SubmitButton type='submit' primary label='Enviar' color="brand"/>
           </Box>
         </Form>
 

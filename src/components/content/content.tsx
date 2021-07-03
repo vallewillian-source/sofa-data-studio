@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CONTENT_PAGES } from '../../../electron/models/defines/ContentPagesDefines';
 import { IAction } from '../../../electron/models/IAction';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/store';
 import { ActionContent } from './actionContent';
 import { HomeContent } from './homeContent';
